@@ -3,7 +3,7 @@
 
 to run locally, clone repo and go to: file:///C:/.../CalendarVis/index.html
 
-To use: 
+To use:
 - Get ics file from outlook
 - Convert to csv here http://www.indigoblue.eu/ics2csv/ (this converter isn't great, should find a better one). Rename your file like: **firstname#surname.csv**
 - Go to app url, open developer console
@@ -20,7 +20,7 @@ Basic idea:
 ```javascript
 	calendar_data = [
 		{
-			SUMMARRY: "Meeting about the thing",
+			SUMMARY: "Meeting about the thing",
 			DTSTART: Date,
 			DTEND: Date,
 			NOTES: "Agenda: 1. Talk about the thing  2. Drink tea  3....."
@@ -32,12 +32,14 @@ Basic idea:
 - populateNodesEdges() converts calendar_data to
 ```javascript
 	nodes = [
-		{id: ..., label: ..., color: ..., ...},
+		{id: (meeting summary), label: ..., color: ..., notes: (meeting notes), ...},
+		...
+		{id: (person name), label: ..., color: ..., ...},
 		...
 	];
 
 	edges = [
-		{from: (some node id), to: (other node id)},
+		{from: (name node id), to: (meeting node id)},
 		...
 	];
 ```

@@ -19,7 +19,7 @@ var parseFilesAndVisualise = function(evt) {
 		//Each file has a reader which er reads it
 		var reader = new FileReader();
 		reader.readAsText(file);
-		//Indices for keeping tracck of when the last file is loaded
+		//Indices for keeping track of when the last file is loaded
 		reader.current_file_name = file.name;
 		reader.current_file_index = i;
 		reader.last_index = files.length - 1;
@@ -29,7 +29,7 @@ var parseFilesAndVisualise = function(evt) {
 			//Convert file name to person name
 			var name_list = this.current_file_name.split(".")[0].split("#");
 			var name = name_list[1]+", "+name_list[0];
-			//Parse the text string into a global structured js object (calendar_data)
+			//Parse file text into an array of structured js objects (calendar_data)
 			populateCalendarData(name, this.result);
 
 			if (this.current_file_index === this.last_index) {
@@ -103,6 +103,7 @@ function processKeyDown(e) {
 * Checks if a particular object is in list by comparing ids
 * @param {Object} obj - object to check
 * @param {Object[]} list - list of objects
+* @returns {Boolean} - whether obj is in list
 */
 function isObjectInList(obj, list) {
 	var isit = false;
