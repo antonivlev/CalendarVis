@@ -1,5 +1,5 @@
 //Index up to which calendar_data is parsed. Reduce for less data and quicker visualisation
-const UPTO = 10;
+UPTO = 10;
 
 /**
 * Reads the files and starts visualisation. Handler, currently attached to <input type=file ...>, executed on event evt.
