@@ -11,7 +11,7 @@ To use:
 
 ----------------------------------------
 Note:
-- Searching nodes is slow. At the top of script.js constant UPTO can be used to reduce network graph size for faster searching.
+- Searching nodes is slow. At the top of script.js integer UPTO can be used to reduce network graph size for faster searching. UPTO is used only on line 37 (populateNodesEdges(UPTO)).
 
 
 
@@ -31,16 +31,16 @@ Basic idea:
 ```
 - populateNodesEdges() converts calendar_data to
 ```javascript
-	nodes = [
+	node_list = [
 		{id: (meeting summary), label: ..., color: ..., notes: (meeting notes), ...},
 		...
 		{id: (person name), label: ..., color: ..., ...},
 		...
 	];
 
-	edges = [
+	edge_list = [
 		{from: (name node id), to: (meeting node id)},
 		...
 	];
 ```
-- visualise() uses nodes and edges to draw the network
+- visualise() uses node_list and edge_list to draw the network
