@@ -3,6 +3,9 @@
 
 to run locally, clone repo and go to: file:///C:/.../CalendarVis/index.html
 
+<img src="graph.png" width=800 height=383></img>
+Blue nodes are meetings, orange are people. Open dev console and mouse over nodes to see some node data.
+
 To use:
 - Get ics file from outlook
 - Convert to csv here http://www.indigoblue.eu/ics2csv/ (this converter isn't great, should find a better one). Rename your file like: **firstname#surname.csv**

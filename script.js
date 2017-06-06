@@ -162,6 +162,7 @@ function populateNodesEdges(upto) {
 
 	console.log("num nodes: "+node_list.length);
 	console.log("num edges: "+edge_list.length);
+	console.log(calendar_data);
 }
 
 /**
@@ -297,7 +298,52 @@ calendar_data = [
 	...
 ]
 */
-var calendar_data = [];
+var calendar_data = [  
+   {  
+      "SUMMARY":"Some Project",
+      "DTSTART":null,
+      "DTEND":null,
+      "DUE":"",
+      "NOTES":"Discuss tea drinking ",
+      "ATTENDEE":[  
+         "Bob, John",
+         "Smith, Samuel",
+         "DiCaprio, Dave"
+      ],
+      "LOCATION":"Meeting room 3",
+      "PRIORITY":"5",
+      "URL":""
+   },
+   {  
+      "SUMMARY":"Planning plan #45",
+      "DTSTART":null,
+      "DTEND":null,
+      "DUE":"",
+      "NOTES":"Hello everyone, we should do things.",
+      "ATTENDEE":[  
+         "Bob, John",
+         "Smith, Samuel",
+         "Scott, Michael"
+      ],
+      "LOCATION":"Meeting room 2",
+      "PRIORITY":"5",
+      "URL":""
+   },
+      {  
+      "SUMMARY":"Star Wars Sequel",
+      "DTSTART":null,
+      "DTEND":null,
+      "DUE":"",
+      "NOTES":"Empire did nothing wrong.",
+      "ATTENDEE":[  
+         "Scott, Michael",
+         "Skywalker, Luke"
+      ],
+      "LOCATION":"Meeting room 1",
+      "PRIORITY":"5",
+      "URL":""
+   }
+];
 
 //These two are populated by populateNodesEdges() and used to generate network in visualise
 //--Contains node objects {id: ..., label: ..., ...}
@@ -310,3 +356,5 @@ var nodes = new vis.DataSet();
 
 //Attaching listeners
 document.getElementById('files').addEventListener('change', parseFilesAndVisualise, false);
+populateNodesEdges(UPTO);
+visualise();
