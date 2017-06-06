@@ -4,6 +4,7 @@
 to run locally, clone repo and go to: file:///C:/.../CalendarVis/index.html
 
 <img src="graph.png" width=800 height=383></img>
+
 Blue nodes are meetings, orange are people. Open dev console and mouse over nodes to see some node data.
 
 To use:
