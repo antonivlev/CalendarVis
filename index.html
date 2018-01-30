@@ -18,9 +18,28 @@
     <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
-    <input type="text" id="search-bar-input" onkeyup="highlightNetwork(this.value)" placeholder="Ctrl-F to search...">
+    <div id="node-info">
+      <p>
+        This visualisation shows some calendar information from the employees
+        of an imaginary company. The recatngles are meetings and the ovals are people.
+        A connecting line means that the person has attended a meeting.
+      </p>
+      <p>You can zoom in and out and move nodes around.</p>
+      <p>
+        Try searching for 'cloud' or 'neural': all meetings where the agenda or the title contains the
+        search term will be highlighted, as well as the people who attended. Mouseover a node to see information about it.
+        The idea is to show the spread of ideas in a company and to find the relevant people for an idea or an issue.
+      </p>
+
+      <input type="text" id="search-bar-input" onkeyup="highlightNetwork(this.value)" placeholder="Ctrl-F to search...">
+      <h3 id="node-id">Try searching for 'cloud'</h3>
+      <h4 id="node-date"></h4>
+      <h4 id="node-role"></h4>
+      <p id="node-notes"></p>
+    </div>
+
     <div id="mynetwork"></div>
-		<script src="http://underscorejs.org/underscore.js"></script>
+    <script src="http://underscorejs.org/underscore.js"></script>
     <script src="makeData.js"></script>
     <script src="script.js"></script>
   </body>

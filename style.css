@@ -1,20 +1,29 @@
 #mynetwork {
 	width: 1000px;
-	height: 900px;
+	height: 600px;
 	border: 1px solid lightgray;
+  float: right;
+}
+
+#node-info {
+  font-family: monospace;
+  width: 300px;
+  float: left;
 }
 
 #search-bar-input {
+  font-family: monospace;
+
 	display: none;
 	outline: none;
 	box-shadow: none;
 	border: none;
-	position: fixed;
+	/* position: fixed;
 	right: 8px;
-	top: 10px;
+	top: 10px; */
 	width: 300px;
 	height: 40px;
-	font-size: 30px;
+	font-size: 20px;
 	background-color: white;
 	z-index: 2;
 	padding: 10px 10px 10px 10px;

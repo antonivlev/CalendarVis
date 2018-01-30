@@ -25,9 +25,9 @@ var nodes = new vis.DataSet();
 * @param {Event} e - keyboard event
 */
 function processKeyDown(e) {
-  if (e.key === "f" && e.ctrlKey) {
+  if (e.key === 'f' && e.ctrlKey) {
     e.preventDefault();
-    document.getElementById("search-bar-input").focus();
+    document.getElementById('search-bar-input').focus();
   }
 }
 
@@ -40,7 +40,7 @@ function processKeyDown(e) {
 function isObjectInList(obj, list) {
   var isit = false;
   list.map(function(list_obj){
-    if (list_obj["id"] === obj["id"]) isit = true;
+    if (list_obj['id'] === obj['id']) isit = true;
   });
   return isit;
 }
@@ -55,45 +55,56 @@ function populateNodesEdges(upto) {
   calendar_data.map(function(meeting) {
     //Convert each meeting to a node. More attributes (such as dates) will be included later
     var meeting_node = {
-      id: meeting["SUMMARY"],
-      label: meeting["SUMMARY"].slice(0, 20),
-      shape: "box",
-      notes: meeting["NOTES"],
-      type:"meeting",
-      color: "#D2E5FF",
-      attendees: meeting["ATTENDEE"]
+      id: meeting['SUMMARY'],
+      label: meeting['SUMMARY'].slice(0, 20),
+
+      shape: 'box',
+      shapeProperties: {
+        borderRadius: 0
+      },
+      borderWidth: 0,
+      color: '#D0D0D0',
+
+      notes: meeting['NOTES'],
+      type:'meeting',
+      attendees: meeting['ATTENDEE'],
+      date: meeting['DTSTART']
     };
     //Avoid repetition
     if (!isObjectInList(meeting_node, node_list)) node_list.push(meeting_node);
 
     //Now add name nodes for each attendee of the meeting
-    if (meeting["ATTENDEE"] !== undefined) {
-      meeting["ATTENDEE"].map(function(name) {
+    if (meeting['ATTENDEE'] !== undefined) {
+      meeting['ATTENDEE'].map(function(name) {
         //Parsing attendee names. Need to improve this.
-        var surname = name.split(",")[0];
-        if (surname === "") surname = name;
-        surname = surname.slice(0, 10);
+        // var surname = name.split(',')[0];
+        // if (surname === '') surname = name;
+        // surname = surname.slice(0, 10);
 
-        //A name node has redundant attributes "notes" and "attendees"
-        //to avoid "undefined" errors, when the netwok is manipulated. Definitely need to improve this.
+        //A name node has redundant attributes 'notes' and 'attendees'
+        //to avoid 'undefined' errors, when the netwok is manipulated. Definitely need to improve this.
         var name_node = {
           id: name,
-          label: surname,
-          color: "#FFDAB9",
-          type: "person",
-          notes:"",
-          attendees: []
+          label: name,
+
+          borderWidth: 0,
+          color: '#FFDAB9',
+
+          type: 'person',
+          notes:'',
+          attendees: [],
+          role: roles[name]
         };
         if (!isObjectInList(name_node, node_list)) node_list.push(name_node);
 
         //Add an edge from the meeting to the attendee
-        edge_list.push({from: meeting["SUMMARY"], to: name, length: 1});
+        edge_list.push({from: meeting['SUMMARY'], to: name, length: 1});
       });
     }
   });
 
-  console.log("num nodes: "+node_list.length);
-  console.log("num edges: "+edge_list.length);
+  console.log('num nodes: '+node_list.length);
+  console.log('num edges: '+edge_list.length);
   console.log(calendar_data);
 }
 
@@ -139,16 +150,20 @@ function visualise() {
       }
     },
     layout: {
-      improvedLayout: false
+      improvedLayout: true
     }
   };
 
+  //Add the search bar
+  document.getElementById('search-bar-input').setAttribute('style', 'display: block');
+  document.addEventListener('keydown', processKeyDown, false);
+
   //initialize your network
   var network = new vis.Network(container, data, options);
-
-  //Add the search bar
-  document.getElementById("search-bar-input").setAttribute("style", "display: block");
-  document.addEventListener('keydown', processKeyDown, false);
+  vis.fit({
+    nodes: data.nodes,
+    animation: false
+  });
 }
 
 /**
@@ -179,7 +194,7 @@ function getIdsContaining(val) {
 function highlightNetwork(val) {
   var ids = getIdsContaining(val);
 
-  if (val !== "") {
+  if (val !== '') {
     nodes.get().map(function(node) {
       if (ids.indexOf(node.id) !== -1) {
         highlightNode(node);
@@ -197,13 +212,13 @@ function highlightNetwork(val) {
 }
 
 function highlightNode(node) {
-  if (node.type === "meeting") node.color = "#2B7CE9";
-  else node.color = "#F08080";
+  if (node.type === 'meeting') node.color = '#2B7CE9';
+  else node.color = '#F08080';
 }
 
 function unhighlightNode(node) {
-  if (node.type === "person") node.color = "#FFDAB9";
-  else node.color = "#D2E5FF";
+  if (node.type === 'person') node.color = '#FFDAB9';
+  else node.color = '#D2E5FF';
 }
 
 /**
@@ -211,10 +226,23 @@ function unhighlightNode(node) {
 */
 function displayNodeProperties(values, id, selected, hovering) {
   if (hovering) {
-    console.clear();
-    console.log("%c "+id, "background: dodgerblue;");
-    console.log(nodes.get(id).notes);
-  };
+    // console.clear();
+    // console.log('%c '+id, 'background: dodgerblue;');
+    // console.log(nodes.get(id).notes);
+
+    document.getElementById('node-id').textContent = id;
+
+    if (nodes.get(id).date != null) document.getElementById('node-date').textContent = nodes.get(id).date.toLocaleDateString('en-GB');
+    else  document.getElementById('node-date').textContent = '';
+
+    if (nodes.get(id).role != null) document.getElementById('node-role').textContent = nodes.get(id).role;
+    else  document.getElementById('node-role').textContent = '';
+
+    document.getElementById('node-notes').textContent = nodes.get(id).notes;
+  }
+
+  // document.getElementById('node-id').textContent = '';
+  // document.getElementById('node-notes').textContent = '';
 }
 
 
