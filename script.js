@@ -64,6 +64,9 @@ function populateNodesEdges(upto) {
       },
       borderWidth: 0,
       color: '#D0D0D0',
+      font: {
+        color: '#343434'
+      },
 
       notes: meeting['NOTES'],
       type:'meeting',
@@ -89,6 +92,9 @@ function populateNodesEdges(upto) {
 
           borderWidth: 0,
           color: '#FFDAB9',
+          font: {
+            color: '#343434'
+          },
 
           type: 'person',
           notes:'',
@@ -203,22 +209,32 @@ function highlightNetwork(val) {
       nodes.update(node);
     });
   } else {
-    //Unhighlights everything if nothing in search bar
+    //highlights everything if nothing in search bar
     nodes.get().map(function(node) {
-      unhighlightNode(node);
+      highlightNode(node);
       nodes.update(node);
     });
   }
 }
 
 function highlightNode(node) {
-  if (node.type === 'meeting') node.color = '#2B7CE9';
-  else node.color = '#F08080';
+  if (node.type === 'meeting') {
+    node.color = '#D0D0D0';
+    node.font.color = '#343434';
+  } else {
+    node.color = '#FFDAB9';
+    node.font.color = '#343434';
+  }
 }
 
 function unhighlightNode(node) {
-  if (node.type === 'person') node.color = '#FFDAB9';
-  else node.color = '#D2E5FF';
+  if (node.type === 'person') {
+    node.color = '#FFDAB954';
+    node.font.color = '#34343454';
+  } else {
+    node.color = '#D0D0D054';
+    node.font.color = '#34343454';
+  }
 }
 
 /**
