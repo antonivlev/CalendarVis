@@ -1,5 +1,5 @@
 # CalendarVis app
-#### https://antonivlev.github.io/CalendarVis/
+#### https://antonivlev.github.io/calendar-vis/
 
 to run locally, clone repo and go to: file:///C:/.../CalendarVis/index.html
 
